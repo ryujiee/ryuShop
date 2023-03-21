@@ -8,8 +8,8 @@ Para iniciar o sistema, certifique-se de que o seu ambiente possua o NodeJS e Mo
 
 1. Clone o repositório do projeto para o seu computador.
 2. Abra um terminal e navegue até a pasta raiz do projeto.
-3. Execute o comando 'npm install' para instalar as dependências do projeto e 'npm install pm2 -g' para instalar globalmente o processo de deploy da aplicação.
-4. Execute o comando 'pm2 start' no terminal acessando o diretório da aplicação para iniciar. Estará disponível para acesso em http://localhost:3000/. Basta acessar em seu navegador.
+3. Execute o comando `npm install` para instalar as dependências do projeto e 'npm install pm2 -g' para instalar globalmente o processo de deploy da aplicação.
+4. Execute o comando `pm2 start` no terminal acessando o diretório da aplicação para iniciar. Estará disponível para acesso em http://localhost:3000/. Basta acessar em seu navegador.
 
 ## Autenticação
 
