@@ -1,6 +1,6 @@
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=008000&height=120&section=header"/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=35&center=true&vCenter=true&duration=2000&pause=1000&color=000000&width=1000&lines=ryuShop;Aplica%C3%A7%C3%A3o+NodeJS+de+produtos+x+pedidos;DevEvolution+IXCSoft)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=35&center=true&vCenter=true&duration=2000&pause=1000&color=055808&width=1000&lines=ryuShop;Aplica%C3%A7%C3%A3o+NodeJS+de+produtos+x+pedidos;DevEvolution+IXCSoft)](https://git.io/typing-svg)
 
 <div style="display: flex; justify-content: center;">
   <img src="https://user-images.githubusercontent.com/128520952/226720550-143ca0e1-3918-409f-a2bd-b63e7b37bd2d.png?raw=true" style="object-fit: contain;">
