@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <title>Produtos</title>
+      <link rel="stylesheet" href="/css/product.css" />
+   </head>
+   <body>
+      <form action="/products/createTemplate" method="POST">
+      <button id="btn-inserir" class="redirect" type="submit"><ion-icon name="cart-outline"></ion-icon> Inserir template de produtos</button>
+      </form>
+      <div class="navigation">
+         <ul>
+            <li class="list">
+               <a href="/">
+                  <span class="icon">
+                     <ion-icon name="home-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Home</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/entrancesandexits">
+                  <span class="icon">
+                     <ion-icon name="podium-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Relatórios</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/userslist">
+                  <span class="icon">
+                     <ion-icon name="people-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Usuários</span>
+               </a>
+            </li>
+            <li class="list active">
+               <a href="/productslist">
+                  <span class="icon">
+                     <ion-icon name="bag-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Produtos</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/cart">
+                  <span class="icon">
+                     <ion-icon name="card-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Realizar Vendas</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/api">
+                  <span class="icon">
+                     <ion-icon name="settings-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">API</span>
+               </a>
+            </li>
+            <li class="list-logout">
+               <a href="/logout">
+                  <span class="icon">
+                     <ion-icon name="log-out-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Sair</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+      <!-- CONFIGURAÇÃO DO TITULO-->
+      <div class="form">
+         <form action="/products" method="post" onSubmit="registerProduct()">
+            <div class="form-header">
+               <div class="tittle_product">
+                  <h1>Cadastrar novo produto.</h1>
+               </div>
+            </div>
+      
+      <!-- CADASTRAR NOVO PRODUTO -->
+         <div class="input-group">
+            <div class="input-box">
+               <label><ion-icon name="pricetag-outline"></ion-icon> Nome: </label>
+               <input class="form-control" type="text" name="name" id="name" placeholder="Nome do produto..." required>
+            </div>
+            <div class="input-box">
+               <label><ion-icon name="barcode-outline"></ion-icon> Código: </label>
+               <input class="form-control" type="text" name="barcode" id="barcode" placeholder="Código do produto..." required>
+            </div>
+            <div class="input-box">
+               <label><ion-icon name="cart-outline"></ion-icon> Preço R$: </label>
+               <input class="form-control" type="text" name="salePrice" id="salePrice" placeholder="Preço do produto..."  required pattern="\d+(\.\d{1,2})?">
+            </div>
+            <div class="input-box">
+               <label><ion-icon name="file-tray-stacked-outline"></ion-icon> Estoque: </label>
+               <input class="form-control" type="number" name="amount" id="amount" placeholder="Estoque disponível..." required>
+            </div>
+            <div class="input-box">
+               <label><ion-icon name="calendar-outline"></ion-icon> Data de validade: </label>
+               <input class="form-control" type="date" name="expirationDate" id="expirationDate" required>
+            </div>
+         </div>
+         <button class="btn" id="open-modal" type="submit">Cadastrar produto</button>
+      </form> 
+
+         <!-- LISTAR PRODUTOS CRIADOS -->
+               <div class="form-header">
+                  <div class="tittle_product">
+                     <h1>Lista de produtos.</h1>
+                  </div>
+               </div>
+            <form action="/productslist" method="post">
+               <p><ion-icon name="search-outline"></ion-icon> Filtro de pesquisa:</p>
+               <input class="form-control" type="text" placeholder="Nome do produto" name="nome" autofocus/>
+               <input class="form-control" type="text" placeholder="Código do produto" name="searchBarcode"/>
+               <button class="btn" type="submit">Pesquisar</button>
+               <a class="clear-btn" href="/productslist">Limpar</a>
+
+               <table>
+                  <tr>
+                    <th>Código do Produto</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Data de Vencimento</th>
+                    <th>Ação</th>
+                  </tr>
+                  <% for (let i = 0; i < products.length; i++) { %>
+                  <tr>
+                    <td><%= products[i].barcode %></td>
+                    <td><%= products[i].name %></td>
+                    <td><%= products[i].formattedSalePrice %></td>
+                    <td><%= products[i].amount %></td>
+                    <td><%= products[i].formattedExpirationDate %></td>
+                    <td>
+                      <a class="icon" href="/products/edit/<%= products[i]._id %>">
+                        <ion-icon name="create-outline"></ion-icon>
+                      </a>
+                      <button class="trash icon" data-id="<%= products[i]._id %>"><ion-icon name="trash-outline"></ion-icon></button>
+                    </td>
+                  </tr>
+                  <% } %>
+                </table>
+                
+      </form>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <script>
+      // FUNÇÃO PARA REMOVER O ITEM DA LISTA
+      const deleteButtons = document.querySelectorAll('.trash');
+      deleteButtons.forEach((button) => {
+         button.addEventListener('click', (event) => {
+      const productId = event.currentTarget.dataset.id;
+      const confirmation = confirm("Deseja realmente deletar o produto?");
+         if (confirmation) {
+               fetch(`/products/delete/${productId}`, { method: 'DELETE' })
+         .then((response) => {
+            if (response.ok) {
+            window.location.reload();
+         } else {
+            console.error('Não foi possível remover o produto');
+          }
+        })
+        .catch((error) => console.error(error));
+    }
+  });
+});
+
+// ATUALIZAR A PÁGINA DPS DE INSERIR
+const btnInserir = document.getElementById('btn-inserir');
+
+btnInserir.addEventListener('click', () => {
+  location.reload();
+});
+      </script>
+   </body>
+</html>

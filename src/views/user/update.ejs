@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <html>
+      <head>
+         <meta charset="UTF-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width, inicial-scale=1.0">
+         <title>Usuários</title>
+         <link rel="stylesheet" href="/css/users.css"/>
+      </head>
+      <body>
+        <form action="/userslist" method="GET">
+            <button id="btn-inserir" class="redirect" type="submit"><ion-icon name="arrow-back-circle-outline"></ion-icon> Voltar</button>
+        </form>
+         <div class="navigation">
+            <ul>
+               <li class="list">
+                  <a href="/">
+                     <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Home</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/entrancesandexits">
+                     <span class="icon">
+                        <ion-icon name="podium-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Relatórios</span>
+                  </a>
+               </li>
+               <li class="list active">
+                  <a href="/userslist">
+                     <span class="icon">
+                        <ion-icon name="people-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Usuários</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/productslist">
+                     <span class="icon">
+                        <ion-icon name="bag-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Produtos</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/cart">
+                     <span class="icon">
+                        <ion-icon name="card-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Realizar Vendas</span>
+                  </a>
+               </li>
+               <li class="list-logout">
+                  <a href="/logout">
+                     <span class="icon">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Sair</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+              <!-- CONFIGURAÇÃO DO TITULO-->
+      <div class="form">
+           <div class="form-header">
+              <div class="tittle_product">
+                 <h1>Usuários</h1>
+              </div>
+           </div>
+           <form action="/users/edit/<%= user._id %>?_method=PUT" method="post" class="form">
+            <div class="input-group">
+                <div class="input-box">
+                    <p>Nome: </p>
+                    <% if(user.name === 'admin') { %>
+                        <input type="text" name="name" value="admin" class="form-input" readonly/>
+                    <% } else { %>
+                        <input type="text" name="name" value="<%= user.name %>" class="form-input"/>
+                    <% } %>
+                </div>
+                <div class="input-box">
+                    <p>E-mail: </p>
+                    <% if(user.name === 'admin') { %>
+                        <input type="email" name="email" value="admin@ryushop.com" class="form-input" readonly/>
+                    <% } else { %>
+                        <input type="email" name="email" value="<%= user.email %>" class="form-input"/>
+                    <% } %>
+                </div>
+                <div class="input-box">
+                    <p>Senha: </p>
+                    <% if(user.name === 'admin') { %>
+                        <input type="password" name="password" placeholder="********" class="form-input" required/>
+                    <% } else { %>
+                        <input type="password" name="password" placeholder="********" class="form-input" required/>
+                    <% } %>
+                </div>
+                <br>
+                <button class='btn' type="submit">Salvar</button>
+            </div>
+        </form>
+        <% if(user.name === 'admin') { %>
+            <p class="informativo">OBS: O usuário tipo "admin" é possível alterar apenas a senha!</p>
+            <% } %>
+        
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </body>
+</html>

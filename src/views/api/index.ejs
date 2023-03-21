@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <html>
+      <head>
+         <meta charset="UTF-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width, inicial-scale=1.0">
+         <title>ryuShop</title>
+         <link rel="stylesheet" href="/css/api.css"/>
+      </head>
+      <body>
+         <div class="navigation">
+            <ul>
+               <li class="list">
+                  <a href="/">
+                     <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Home</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/entrancesandexits">
+                     <span class="icon">
+                        <ion-icon name="podium-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Relatórios</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/userslist">
+                     <span class="icon">
+                        <ion-icon name="people-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Usuários</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/productslist">
+                     <span class="icon">
+                        <ion-icon name="bag-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Produtos</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/cart">
+                     <span class="icon">
+                        <ion-icon name="card-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Realizar Vendas</span>
+                  </a>
+               </li>
+               <li class="list active">
+                  <a href="/api">
+                     <span class="icon">
+                        <ion-icon name="settings-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">API</span>
+                  </a>
+               </li>
+               <li class="list-logout">
+                  <a href="/logout">
+                     <span class="icon">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Sair</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+      <div class="container">
+         <form action="/api/gerarToken" method="POST">
+            <button type="submit">Gerar Token API</button>
+          </form>
+
+          <div class="form">
+               <div class="form-header">
+                  <div class="tittle_product">
+                     <h1> Seu token API:</h1>
+                  </div>
+               </div>
+           </div>    
+           <div class="token-list">
+            <% tokens.forEach(function(token) { %>
+                <ul>
+                    <li><%= token %></li>
+                </ul>
+            <% }); %>
+            <p class="informativo">OBS: É possível gerar apenas um token! E após 1 hora gerado, ou ao reiniciar o servidor, por questão de segurança ele é removido!</p>
+        </div>
+        
+         
+         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      </body>
+   </html>

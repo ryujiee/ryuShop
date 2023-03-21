@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <title>Carrinho</title>
+      <link rel="stylesheet" href="/css/cart.css" />
+   </head>
+   <body>
+      <div class="cart-icon">
+         <form action="/cart" method="post" class="search">
+         <a href="/cart" class="redirect"><ion-icon name="cart-outline"></ion-icon> Voltar para os produtos</a>
+         <span class="cart-count"><%= cart.total.quantity %></span>
+         </form>
+       </div>
+             <div class="navigation">
+         <ul>
+            <li class="list">
+               <a href="/">
+                  <span class="icon">
+                     <ion-icon name="home-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Home</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/entrancesandexits">
+                  <span class="icon">
+                     <ion-icon name="podium-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Relatórios</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/userslist">
+                  <span class="icon">
+                     <ion-icon name="people-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Usuários</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/productslist">
+                  <span class="icon">
+                     <ion-icon name="bag-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Produtos</span>
+               </a>
+            </li>
+            <li class="list active">
+               <a href="/cart">
+                  <span class="icon">
+                     <ion-icon name="card-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Realizar Vendas</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/api">
+                  <span class="icon">
+                     <ion-icon name="settings-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">API</span>
+               </a>
+            </li>
+            <li class="list-logout">
+               <a href="/logout">
+                  <span class="icon">
+                     <ion-icon name="log-out-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Sair</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+
+         <!-- CONFIGURAÇÃO DO TITULO-->
+         <div class="form">
+            <form action="/cart" method="post" class="search">
+               <div class="form-header">
+                  <div class="tittle_product">
+                     <h1>Carrinho.</h1>
+                  </div>
+               </div>
+
+      <!-- CARRINHO -->
+      <table>
+         <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th colspan="3">-</th>
+         </tr>
+         <% for (let i = 0; i < cart.items.length; i++) { %>
+         <tr>
+            <td><%= cart.items[i].product.name %></td>
+            <td>R$ <%= cart.items[i].price %></td>
+            <td><%= cart.items[i].quantity %></td>
+            <td>        
+               <button class="rem_one icon" data-id="<%= cart.items[i].product._id %>"><ion-icon name="remove-circle-outline"></ion-icon></button>
+            </td>
+            <td>
+               <button class="add_one icon" data-id="<%= cart.items[i].product._id %>"><ion-icon name="add-circle-outline"></ion-icon></button>
+            </td>
+            <td>
+               <button class="trash icon" data-id="<%= cart.items[i].product._id %>"><ion-icon name="trash-outline"></ion-icon></button>
+
+            </td>
+         </tr>
+         <% } %>
+      </table>
+      </form>
+      <p class="informativo">OBS: Se a quantidade do produto estiver = 0. Significa que não tem o produto no estoque!</p>
+      <div class="total">
+            <p>Total: R$ <%= cart.total.price %></p>
+            <form action="/sales" method="POST">
+            <input type="hidden" value='0' class="desconto" type="text" name="descount" /> <!-- IDEIA DECONTINUADA -->
+            <button class="btn"> Finalizar Venda </button>
+         </form>
+            <form action="/sales/deleteall?_method=DELETE" method="POST">
+            <button class="cancel-btn"> Cancelar Venda </button></form>
+         </form>
+      </div>
+   </div>
+   <script>
+
+
+    // FUNÇÃO PARA REMOVER O PRODUTO DO CARRINHO
+    const deleteButtons = document.querySelectorAll('.trash');
+    deleteButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+       const productId_del = event.currentTarget.dataset.id;
+      fetch(`/cart/delete/${productId_del}`, { method: 'POST' })
+    });
+    })
+    
+    // FUNÇÃO PARA REMOVER APENAS UM PRODUTO DO CARRINHO
+    const deleteOneButtons = document.querySelectorAll('.rem_one');
+    deleteOneButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+       const productId_rm_one = event.currentTarget.dataset.id;
+      fetch(`/cart/remove-one/${productId_rm_one}`, { method: 'POST' })
+    });
+    })
+    
+    // FUNÇÃO PARA ADICIONAR APENAS UM PRODUTO DO CARRINHO
+    const addOneButtons = document.querySelectorAll('.add_one');
+    addOneButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+       const productId_add_one = event.currentTarget.dataset.id;
+      fetch(`/cart/add-one/${productId_add_one}`, { method: 'POST' })
+    });
+    })
+    
+    
+   </script>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+   </body>
+</html>
+             

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Produto</title>
+    <link rel="stylesheet" href="/css/product.css"/>
+    </head>
+    <body>
+        <div class="navigation">
+            <ul>
+               <li class="list">
+                  <a href="/">
+                     <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Home</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/entrancesandexits">
+                     <span class="icon">
+                        <ion-icon name="podium-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Relatórios</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/userslist">
+                     <span class="icon">
+                        <ion-icon name="people-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Usuários</span>
+                  </a>
+               </li>
+               <li class="list active">
+                  <a href="/productslist">
+                     <span class="icon">
+                        <ion-icon name="bag-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Produtos</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/cart">
+                     <span class="icon">
+                        <ion-icon name="card-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Realizar Vendas</span>
+                  </a>
+               </li>
+               <li class="list">
+                  <a href="/api">
+                     <span class="icon">
+                        <ion-icon name="settings-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">API</span>
+                  </a>
+               </li>
+               <li class="list-logout">
+                  <a href="/logout">
+                     <span class="icon">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                     </span>
+                     <span class="tittle">Sair</span>
+                  </a>
+               </li>
+            </ul>
+         </div>
+
+      <!-- CONFIGURAÇÃO DO TITULO-->
+      <div class="form">
+            <div class="form-header">
+               <div class="tittle_product">
+                  <h1>Editar produto.</h1>
+               </div>
+            </div>
+            
+        <form action="/products/edit/<%=product._id%>?_method=PUT" method="post">
+         <div class="input-group">
+            <div class="input-box">
+               <label><ion-icon name="pricetag-outline"></ion-icon> Nome: </label>
+               <input class="form-control" type="text" name="name" id="name" placeholder="Nome do produto..." required>
+            </div>
+            <div class="input-box">
+               <label><ion-icon name="barcode-outline"></ion-icon> Código: </label>
+               <input class="form-control" type="text" name="barcode" id="barcode" placeholder="Código do produto..." required>
+            </div>
+            <div class="input-box">
+               <label><ion-icon name="cart-outline"></ion-icon> Preço R$: </label>
+               <input class="form-control" type="text" name="salePrice" id="salePrice" placeholder="Preço do produto..."  required pattern="\d+(\.\d{1,2})?">
+            </div>
+            <div class="input-box">
+               <label><ion-icon name="file-tray-stacked-outline"></ion-icon> Estoque: </label>
+               <input class="form-control" type="number" name="amount" id="amount" placeholder="Estoque disponível..." required>
+            </div>
+            <div class="input-box">
+               <label><ion-icon name="calendar-outline"></ion-icon> Data de validade: </label>
+               <input class="form-control" type="date" name="expirationDate" id="expirationDate" required>
+            </div>
+         </div>
+            <div class="row" style="margin-top: 30px"> 
+                <button class="btn" id="open-modal" type="submit">Salvar</button>
+                <a href="/productslist" class="clear-btn">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</html>

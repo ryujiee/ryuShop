@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <title>Entrada e saída</title>
+      <link rel="stylesheet" href="/css/entranceandexitdetails.css" />
+   </head>
+   <body>
+      <div class="navigation">
+         <ul>
+            <li class="list">
+               <a href="/">
+                  <span class="icon">
+                     <ion-icon name="home-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Home</span>
+               </a>
+            </li>
+            <li class="list active">
+               <a href="/entrancesandexits">
+                  <span class="icon">
+                     <ion-icon name="podium-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Relatórios</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/userslist">
+                  <span class="icon">
+                     <ion-icon name="people-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Usuários</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/productslist">
+                  <span class="icon">
+                     <ion-icon name="bag-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Produtos</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/cart">
+                  <span class="icon">
+                     <ion-icon name="card-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Realizar Vendas</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/api">
+                  <span class="icon">
+                     <ion-icon name="settings-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">API</span>
+               </a>
+            </li>
+            <li class="list-logout">
+               <a href="/logout">
+                  <span class="icon">
+                     <ion-icon name="log-out-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Sair</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+
+    
+      <!-- CONFIGURAÇÃO DO TITULO-->
+      <div class="form">
+        <div class="form-header">
+           <div class="tittle_product">
+              <h1>Detalhes.</h1>
+           </div>
+       </div>
+       <div class="content">
+
+    <form class="search" action="/entrancesandexitsdatailsdates" method="post">
+      <p><ion-icon name="search-outline"></ion-icon> Filtro de pesquisa:</p>
+
+        <div class="row">            
+            <div class="col-md-4">
+                <label for="startDate" class="form-label">Data Inicial</label>
+                <input id="startDate" value="<%=startDate%>" class="form-control" type="date" name="startDate" />
+            </div>
+            <div class="col-md-4">
+                <label for="finalDate" class="form-label">Data final</label>
+                <input id="finalDate" value="<%=finalDate%>"  class="form-control" type="date" name="finalDate" />
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary bnt-exit" type="submit">Pesquisar</button>
+                <% if (dateFilter !== false) { %>
+                    <a href="/entrancesandexitsdatails" class="btn btn-secondary">Limpar</a>
+                <% } %>
+            </div>
+        </div>
+    </form>
+
+     <div class="row">            
+            <div class="col-md-4 box-data">
+                <label  class="form-label label-data">Entradas</label>
+                <br/>
+                <strong href="#" class="data entrance"><%=totalEntrance%></strong>
+            </div>
+            <div class="col-md-4 box-data">
+                <label  class="form-label label-data">Saídas</label>
+                <br/>
+                <strong href="#" class="data exit"><%=totalExit%></strong>
+            </div>
+            <div class="col-md-4 box-data">
+                <label  class="form-label label-data">Saldo</label> 
+                <br/>
+                <strong href="#" class="data balance"><%=balance%></strong>
+            </div>
+        </div>
+</div>    
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
+

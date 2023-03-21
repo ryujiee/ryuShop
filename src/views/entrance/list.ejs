@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <title>Carrinho</title>
+      <link rel="stylesheet" href="/css/entrance.css" />
+   </head>
+   <body>
+      <div class="navigation">
+         <ul>
+            <li class="list">
+               <a href="/">
+                  <span class="icon">
+                     <ion-icon name="home-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Home</span>
+               </a>
+            </li>
+            <li class="list active">
+               <a href="/entrancesandexits">
+                  <span class="icon">
+                     <ion-icon name="podium-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Relatórios</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/userslist">
+                  <span class="icon">
+                     <ion-icon name="people-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Usuários</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/productslist">
+                  <span class="icon">
+                     <ion-icon name="bag-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Produtos</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/cart">
+                  <span class="icon">
+                     <ion-icon name="card-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Realizar Vendas</span>
+               </a>
+            </li>
+            <li class="list">
+               <a href="/api">
+                  <span class="icon">
+                     <ion-icon name="settings-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">API</span>
+               </a>
+            </li>
+            <li class="list-logout">
+               <a href="/logout">
+                  <span class="icon">
+                     <ion-icon name="log-out-outline"></ion-icon>
+                  </span>
+                  <span class="tittle">Sair</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+
+      <!-- CONFIGURAÇÃO DO TITULO-->
+      <div class="form">
+         <div class="form-header">
+            <div class="tittle_product">
+               <h1>Entradas.</h1>
+               <div class="vendas">
+                <strong class="sales">Vendas: <%= entrances.length %> </strong>
+                <br>
+                <strong class="balance">Total: <%= total %></strong>
+               </div>
+            </div>
+        </div>
+
+        <form class="search" action="/entrancesdate" method="post">
+            <div class="row">            
+               <p><ion-icon name="search-outline"></ion-icon> Filtro de pesquisa:</p>
+                <div class="col-md-4">
+                    <label for="startDate" class="form-label">Data Inicial</label>
+                    <input id="startDate" value="<%=startDate%>" class="form-control" type="date" name="startDate" />
+                </div>
+                <div class="col-md-4">
+                    <label for="finalDate" class="form-label">Data final</label>
+                    <input id="finalDate" value="<%=finalDate%>" class="form-control" type="date" name="finalDate" />
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary" type="submit">Pesquisar</button>
+                    <% if (dateFilter != false) { %>
+                        <a href="/entrances" class="btn btn-secondary">Limpar</a>
+                    <% } %>
+                </div>
+            </div>
+        </form>
+        
+        <table class="table">
+            <tr>
+                <th>Tipo de Entrada</th>
+                <th>Valor</th>
+                <th>Data</th>
+            </tr>
+            <% for (var i = 0; i < entrances.length; i++) { 
+                  var entrance = entrances[i];
+                  if (entrance != null) { %>
+                    <tr>
+                        <td>Venda</td>
+                        <td><%= entrance.formattedValue %></td>
+                        <td><%= entrance.formattedDate %></td>
+                    </tr>
+                <% } %>
+            <% } %>
+        </table>
+    </div>    
+</div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
