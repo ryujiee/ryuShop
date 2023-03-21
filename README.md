@@ -1,4 +1,4 @@
-# Documentação ryuShop - Aplicação NodeJS de produtos x pedidos/vendas
+# ryuShop.
 
 ## Introdução
 
