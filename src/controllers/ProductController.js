@@ -152,6 +152,29 @@ class ProductController {
 		});
 	}
 
+	async APIlist(req, res) {
+		const filters = {};
+		
+		let products = await Product.paginate(filters, {
+			limit: parseInt(req.query.limit_page) || 2000,
+			sort: "-createdAt",
+		});
+	
+		const getProductsPromise = products.docs.map(async (product) => {
+			product.formattedExpirationDate = moment(product.expirationDate).format(
+				"DD-MM-YYYY"
+			);
+			product.formattedPrice = formatCurrency.brl(product.price);
+			product.formattedSalePrice = formatCurrency.brl(product.salePrice);
+			return product;
+		});
+	
+		products.docs = await Promise.all(getProductsPromise);
+	
+		return res.json(products);
+	}
+	
+	
 	async store(req, res) {
 		const {
 			name,
@@ -258,6 +281,43 @@ class ProductController {
 
 		return res.redirect("/productslist");
 	}
+	
+	async APIstore(req, res) {
+		const {
+		  name,
+		  salePrice,
+		  amount,
+		  expirationDate,
+		  barcode,
+		} = req.body;
+	  
+		if (!name || !salePrice || !amount) {
+		  return res.status(400).json({
+			message: "Preencha os campos obrigatórios (*) para continuar!",
+		  });
+		}
+	  
+		const existingProduct = await Product.findOne({
+		  barcode: barcode,
+		});
+	  
+		if (existingProduct) {
+		  return res.status(409).json({
+			message: "Produto já cadastrado com este código de barras.",
+		  });
+		}
+	  
+		const newProduct = await Product.create({
+		  ...req.body,
+		  expirationDate: !expirationDate ? null : moment(expirationDate).format(),
+		});
+	  
+		return res.status(201).json({
+		  message: "Produto adicionado com sucesso!",
+		  product: newProduct,
+		});
+	  }
+	  
 }
 
 module.exports = new ProductController();

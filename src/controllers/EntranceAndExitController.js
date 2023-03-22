@@ -27,7 +27,7 @@ class EntranceAndExitController {
 			dateFilter = true;
 
 			filtersEntrance.createdAt = {};
-			filtersExit.date = {};
+			filtersExit.createdAt = {};
 
 			const startDate = moment(req.body.startDate).format(
 				"YYYY-MM-DDT00:mm:ss.SSSZ"
@@ -40,21 +40,23 @@ class EntranceAndExitController {
 			filtersEntrance.createdAt.$gte = startDate;
 			filtersEntrance.createdAt.$lte = finalDate;
 
-			filtersExit.date.$gte = startDate;
-			filtersExit.date.$lte = finalDate;
+			filtersExit.createdAt.$gte = startDate;
+			filtersExit.createdAt.$lte = finalDate;
+			
 		}
 
 		let entrances = await Entrance.paginate(filtersEntrance, {
 			page: req.query.page || 1,
 			limit: parseInt(req.query.limit_page) || 2000,
 			sort: "-createdAt",
-		});
-
-		let exits = await Exit.paginate(filtersExit, {
+		  });
+		  
+		  let exits = await Exit.paginate(filtersExit, {
 			page: req.query.page || 1,
 			limit: parseInt(req.query.limit_page) || 2000,
 			sort: "-date",
-		});
+		  });
+
 
 		if (!startDate || !finalDate) {
 			entrances = entrances.docs.map((entrance) => {
@@ -97,10 +99,12 @@ class EntranceAndExitController {
 					items.exits.push(exit);
 					items.totalExit += exit.value;
 				}
+				console.log(items.totalExit)
 			});
 		}
 
 		items.balance = items.totalEntrance - items.totalExit;
+		console.log(items)
 
 		return res.render("entranceandexitdatails/list", {
 			totalEntrance: formatCurrency.brl(items.totalEntrance),

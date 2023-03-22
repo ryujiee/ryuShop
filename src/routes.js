@@ -118,6 +118,9 @@ routes.post("/api/gerarToken", authMiddleware, APIController.gerarToken);
 routes.post("/api/createUser", tokenMiddleware, UserController.APIstore);
 routes.get("/api/listTokens", tokenMiddleware, APIController.listarTokens);
 routes.post('/api/products/createTemplate', tokenMiddleware, ProductController.createProducts)
+routes.get('/api/products/list', tokenMiddleware, ProductController.APIlist)
+routes.post('/api/products/add', tokenMiddleware, ProductController.APIstore)
+
 
 
 module.exports = routes;
