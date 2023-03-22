@@ -28,7 +28,7 @@ A autenticação é baseada em passport e tokens JWT utilizada em todas as rotas
 ## 📖 Wiki de como utilizar a aplicação!
 Segue abaixo o link para aceesso à documentação de como utilizar a aplicação.
 
-👉 [Wiki ryuShop](URL)
+👉 [Wiki ryuShop](https://short-violin-f69.notion.site/Wiki-ryuShop-f791dfe32950440a8fb00b838f089c84)
 
 ## 🤗 Considerações finais
 Espero que essa documentação seja útil para utilizar a aplicação de forma correta e eficiente. E que eu consiga uma vaga no desenvolvimento do Opa! Suite haha
